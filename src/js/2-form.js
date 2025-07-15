@@ -6,10 +6,13 @@ let formData = {
   message: '',
 };
 
+let newObj = JSON.parse(localStorage.getItem(key));
+
 if (localStorage.getItem(key)) {
-  let newObj = JSON.parse(localStorage.getItem(key));
   form.elements.email.value = newObj.email;
   form.elements.message.value = newObj.message;
+  formData.email = newObj.email;
+  formData.message = newObj.message;
 }
 
 form.addEventListener('input', evt => {
@@ -29,6 +32,8 @@ form.addEventListener('submit', evt => {
     return;
   }
   console.log(formData);
-  localStorage.removeItem(key, formData);
+  formData.email = '';
+  formData.message = '';
+  localStorage.removeItem(key);
   form.reset();
 });
